@@ -36,8 +36,7 @@ sub run {
     my $indx = index($str, $substr);
     while ($indx != -1){
     	$num++;
-    	substr($str, $indx, length($substr)) = "";
-    	$indx = index($str, $substr);
+    	$indx = index($str, $substr,$indx + length($substr));
     }
 
     print "$num\n";
