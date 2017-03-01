@@ -4,65 +4,69 @@ use strict;
 use warnings;
 use Data::Dumper;
 
-sub make_pairs {
+sub santa {
 	my @list = @_;
 	my @people;
 	my %relations;
 
-	for (@list) {
-		if (ref $_) {
-			if (ref $_ ne 'ARRAY') {
-				print "Not correct argument $_\n";
+	for my $elem (@list) {
+		if (ref $elem) {
+			if (ref $elem ne 'ARRAY') {
+				# print "Not correct argument $elem\n";
 				return undef;
 			}
 			else {
-				if (exists $relations{$_->[1]}) {
-					print "Person $_->[0] repeating";
+				if (exists $relations{$elem->[1]}) {
+					# print "Person $elem->[0] repeating";
 					return undef;
 				}
 
-				if (exists $relations{$_->[1]}) {
-					print "Person $_->[1] repeating";
+				if (exists $relations{$elem->[1]}) {
+					# print "Person $elem->[1] repeating";
 					return undef;
 				}
 
-				push @people, $_->[0];
-				push @people, $_->[1];
-				$relations{$_->[0]} = $->[1];
-				$relations{$_->[1]} = $->[0];
+				push @people, $elem->[0];
+				push @people, $elem->[1];
+				$relations{$elem->[0]} = $elem->[1];
+				$relations{$elem->[1]} = $elem->[0];
 			}
 		}
 		else {
-			if (exists $relations{$_}) {
-				print "Person $_ repeating";
+			if (exists $relations{$elem}) {
+				# print "Person $elem repeating";
 				return undef;
 			}
-			push @people, $_;
-			$relations{$_} = undef;
+			push @people, $elem;
 		}
 	}
-	
+
 	if((scalar @people) % 2 != 0) {
-		print "Not even number of people\n";
+		# print "Not even number of people\n";
 		return undef;
 	}
 
 	my %present;
+	my @gifted;
+
 	for my $from (0 .. $#people) {
 		my $to = int rand(scalar @people);
-
-		if ($to == $from || $relations{$people[$from]} eq $people[$to]{
-			redo;
-		}
-		elsif (not defined $relations{$people[$from]}){
-			$present{$people[$from]} = $people[$to];
-			next;
-		}
-		elsif ($present{$people[$to]} eq $people[$from])() {
-			redo;
-		}
 		
-		$present{$people[$from]} = $people[$to];
+		if($to == $from || $gifted[$to]) {
+			redo;
+		}
+
+		elsif ((defined $relations{$people[$from]}) && ($relations{$people[$from]} eq $people[$to])) {
+			redo;
+		}
+
+		elsif ((defined $present{$people[$to]}) && ($present{$people[$to]} eq $people[$from])) {
+			redo;
+		}
+		else {
+			$gifted[$to] = 1;
+			$present{$people[$from]} = $people[$to];
+		}
 	}
 
 	my @pairs;
@@ -74,5 +78,5 @@ sub make_pairs {
 	return @pairs;
 }
 
-my @pairs = make_pairs("y",["x1","x2"],["x3","x4"],"z");
+my @pairs = santa("y",["x1","x2"],["x3","x4"],"z");
 print Dumper \@pairs;
