@@ -22,17 +22,17 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /usr/lib/x86_64-linux-gnu/perl/5.24/Config.pm).
+# These definitions are from config.sh (via /usr/lib/i386-linux-gnu/perl/5.24/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
-CC = x86_64-linux-gnu-gcc
+CC = i686-linux-gnu-gcc
 CCCDLFLAGS = -fPIC
 CCDLFLAGS = -Wl,-E
 DLEXT = so
 DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
-LD = x86_64-linux-gnu-gcc
+LD = i686-linux-gnu-gcc
 LDDLFLAGS = -shared -L/usr/local/lib -fstack-protector-strong
 LDFLAGS =  -fstack-protector-strong -L/usr/local/lib
 LIBC = libc-2.24.so
@@ -42,9 +42,9 @@ OSNAME = linux
 OSVERS = 3.16.0
 RANLIB = :
 SITELIBEXP = /usr/local/share/perl/5.24.1
-SITEARCHEXP = /usr/local/lib/x86_64-linux-gnu/perl/5.24.1
+SITEARCHEXP = /usr/local/lib/i386-linux-gnu/perl/5.24.1
 SO = so
-VENDORARCHEXP = /usr/lib/x86_64-linux-gnu/perl5/5.24
+VENDORARCHEXP = /usr/lib/i386-linux-gnu/perl5/5.24
 VENDORLIBEXP = /usr/share/perl5
 
 
@@ -81,11 +81,11 @@ INSTALLSITELIB = /usr/local/share/perl/5.24.1
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
 INSTALLVENDORLIB = /usr/share/perl5
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.24
+INSTALLARCHLIB = /usr/lib/i386-linux-gnu/perl/5.24
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /usr/local/lib/x86_64-linux-gnu/perl/5.24.1
+INSTALLSITEARCH = /usr/local/lib/i386-linux-gnu/perl/5.24.1
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
-INSTALLVENDORARCH = /usr/lib/x86_64-linux-gnu/perl5/5.24
+INSTALLVENDORARCH = /usr/lib/i386-linux-gnu/perl5/5.24
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
 INSTALLBIN = /usr/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
@@ -112,15 +112,15 @@ DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
 INSTALLVENDORMAN3DIR = /usr/share/man/man3
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
 PERL_LIB = /usr/share/perl/5.24
-PERL_ARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.24
-PERL_ARCHLIBDEP = /usr/lib/x86_64-linux-gnu/perl/5.24
+PERL_ARCHLIB = /usr/lib/i386-linux-gnu/perl/5.24
+PERL_ARCHLIBDEP = /usr/lib/i386-linux-gnu/perl/5.24
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /usr/lib/x86_64-linux-gnu/perl/5.24/CORE
-PERL_INCDEP = /usr/lib/x86_64-linux-gnu/perl/5.24/CORE
+PERL_INC = /usr/lib/i386-linux-gnu/perl/5.24/CORE
+PERL_INCDEP = /usr/lib/i386-linux-gnu/perl/5.24/CORE
 PERL = "/usr/bin/perl"
 FULLPERL = "/usr/bin/perl"
 ABSPERL = $(PERL)
@@ -818,7 +818,7 @@ ppd :
 	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR></AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.24" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i686-linux-gnu-thread-multi-64int-5.24" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
