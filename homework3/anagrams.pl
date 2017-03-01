@@ -3,6 +3,7 @@
 use warnings;
 use strict;
 use utf8;
+use Encode;
 
 use Data::Dumper;
 
@@ -42,6 +43,6 @@ sub anagrams {
 }
 
 
-binmode(STDOUT,':utf8');
-binmode(STDERR,':utf8');
-print Dumper \{anagrams("листок", "слиток", "столик", "лампа", "мапла")};
+
+my $dump = Dumper \{anagrams("листок", "слиток", "столик", "лампа", "мапла")};
+print encode('utf8', $dump);
