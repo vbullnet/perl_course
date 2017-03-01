@@ -15,10 +15,7 @@ sub anagrams {
 		my @firstLetters = sort {lc($a) cmp lc($b)} split //, $first;
 		my @secondLetters = sort {lc($a) cmp lc($b)} split //, $second;
 
-		for my $i (0 .. $#firstLetters) {
-			return "" if $firstLetters[$i] ne $secondLetters[$i];
-		}
-		return 1;
+		return (join "", @firstLetters) eq (join "", @secondLetters);
 	}
 
 	my @words = @_;
