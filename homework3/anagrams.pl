@@ -42,5 +42,6 @@ sub anagrams {
 }
 
 
-
+binmode(STDOUT,':utf8');
+binmode(STDERR,':utf8');
 print Dumper \{anagrams("листок", "слиток", "столик", "лампа", "мапла")};
