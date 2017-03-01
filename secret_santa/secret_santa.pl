@@ -49,26 +49,46 @@ sub santa {
 	my %present;
 	my @gifted;
 
-	for my $from (0 .. $#people) {
-		my $to = int rand(scalar @people);
-		
-		if($to == $from || $gifted[$to]) {
-			redo;
+	OUTER:
+	while (1)
+	{
+		for my $from (0 .. $#people) {
+			my $to = int rand(scalar @people);
+			
+			if($to == $from || $gifted[$to]) {
+				redo;
+				if ($from == $#people) {
+					%present = ();
+					@gifted = ();
+					next OUTER;
+				}
+			}
+	
+			elsif ((defined $relations{$people[$from]}) && ($relations{$people[$from]} eq $people[$to])) {
+				redo;
+				if ($from == $#people) {
+					%present = ();
+					@gifted = ();
+					next OUTER;
+				}
+			}
+	
+			elsif ((defined $present{$people[$to]}) && ($present{$people[$to]} eq $people[$from])) {
+				redo;
+				if ($from == $#people) {
+					%present = ();
+					@gifted = ();
+					next OUTER;
+				}
+			}
+			else {
+				$gifted[$to] = 1;
+				$present{$people[$from]} = $people[$to];
+				next;
+			}
 		}
-
-		elsif ((defined $relations{$people[$from]}) && ($relations{$people[$from]} eq $people[$to])) {
-			redo;
-		}
-
-		elsif ((defined $present{$people[$to]}) && ($present{$people[$to]} eq $people[$from])) {
-			redo;
-		}
-		else {
-			$gifted[$to] = 1;
-			$present{$people[$from]} = $people[$to];
-		}
+		last;
 	}
-
 	my @pairs;
 
 	for my $key (keys %present) {
