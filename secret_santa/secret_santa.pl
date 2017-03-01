@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use Data::Dumper;
 
 sub make_pairs {
 	my @list = @_;
@@ -36,31 +37,42 @@ sub make_pairs {
 				print "Person $_ repeating";
 				return undef;
 			}
-			push @people, $_
+			push @people, $_;
 			$relations{$_} = undef;
 		}
 	}
-	if(scalar @people % 2 != 0) {
-		print "Not even number of people\n"
+	
+	if((scalar @people) % 2 != 0) {
+		print "Not even number of people\n";
 		return undef;
+	}
+
+	my %present;
+	for my $from (0 .. $#people) {
+		my $to = int rand(scalar @people);
+
+		if ($to == $from || $relations{$people[$from]} eq $people[$to]{
+			redo;
+		}
+		elsif (not defined $relations{$people[$from]}){
+			$present{$people[$from]} = $people[$to];
+			next;
+		}
+		elsif ($present{$people[$to]} eq $people[$from])() {
+			redo;
+		}
+		
+		$present{$people[$from]} = $people[$to];
 	}
 
 	my @pairs;
 
-	my $condition = sub {
-		for my $index (0 .. $#people - 1) {
-			if ($relations{$people[$index]} = $people[$index + 1]) {
-				return false;
-			} 
-		}
-		return true;
-	};
+	for my $key (keys %present) {
+		push @pairs, [$key, $present{$key}];
+	}
 
-	@people = sort {int rand(3) - 1} @people while ($condition->());
-
-	my @return;
-	for (0 .. $#people / 2) {
-		$return[$_] = [$people[2 * $_], $people[2 * $_ + 1]];
-	}	
-	return @return;
+	return @pairs;
 }
+
+my @pairs = make_pairs("y",["x1","x2"],["x3","x4"],"z");
+print Dumper \@pairs;
