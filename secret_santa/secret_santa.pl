@@ -47,5 +47,20 @@ sub make_pairs {
 
 	my @pairs;
 
-		
+	my $condition = sub {
+		for my $index (0 .. $#people - 1) {
+			if ($relations{$people[$index]} = $people[$index + 1]) {
+				return false;
+			} 
+		}
+		return true;
+	};
+
+	@people = sort {int rand(3) - 1} @people while ($condition->());
+
+	my @return;
+	for (0 .. $#people / 2) {
+		$return[$_] = [$people[2 * $_], $people[2 * $_ + 1]];
+	}	
+	return @return;
 }
