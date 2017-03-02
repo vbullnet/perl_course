@@ -2,10 +2,11 @@
 
 use warnings;
 use strict;
+use utf8;
 
 use Data::Dumper;
 
-sub anagrams {
+sub anagrams ($) {
 	sub one_set ($$) {
 		my ($first, $second) = @_;
 
@@ -17,7 +18,8 @@ sub anagrams {
 		return (join "", @firstLetters) eq (join "", @secondLetters);
 	}
 
-	my @words = @_;
+	my ($arrref) = @_;
+	my @words = @{$arrref};
 
 	my %anagram;
 
@@ -43,4 +45,4 @@ sub anagrams {
 
 
 
-print Dumper \{anagrams("листок", "слиток", "столик", "лампа", "мапла")};
+print Dumper \{anagrams ["листок", "слиток", "столик", "лампа", "мапла"]};
