@@ -2,7 +2,6 @@
 
 use warnings;
 use strict;
-use utf8;
 
 use Data::Dumper;
 
@@ -19,6 +18,7 @@ sub anagrams {
 	}
 
 	my @words = @_;
+
 	my %anagram;
 
 	for my $i (0..$#words) {
