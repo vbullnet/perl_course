@@ -2,7 +2,6 @@
 
 use warnings;
 use strict;
-use utf8;
 use Encode;
 use Data::Dumper;
 
@@ -21,6 +20,10 @@ sub anagrams ($) {
 	my ($arrref) = @_;
 	my @words = @{$arrref};
 
+	for (@words) {
+		$_ = decode('utf-8',$_);
+	}
+
 	my %anagram;
 
 	for my $i (0..$#words) {
@@ -29,15 +32,15 @@ sub anagrams ($) {
 
 		for my $j ($i + 1..$#words) {
 			if (one_set($words[$i], $words[$j])) {
-				push @set, lc($words[$j]);
+				push @set, encode('utf-8',lc($words[$j]));
 				$words[$j] = undef;
 			}
 		}
 
-		push @set, lc($words[$i]);
+		push @set, encode('utf-8',lc($words[$i]));
 
 		if (scalar @set > 1) {
-			$anagram{lc($words[$i])} =  [sort{$a cmp $b} @set];
+			$anagram{encode('utf-8',lc($words[$i]))} =  [sort{$a cmp $b} @set];
 		} 
 	}
 	return %anagram;
@@ -46,5 +49,4 @@ sub anagrams ($) {
 
 
 my $arr = ["листок", "слиток", "столик", "лампа", "мапла"];
-@{$arr} = map {encode('utf-8',$_)} @{$arr};
 print Dumper \{anagrams $arr};
